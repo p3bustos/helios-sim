@@ -1,0 +1,66 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: helios-sim
+  
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    default-property-inclusion: non_null
+
+  cache:
+    type: caffeine
+    caffeine:
+      spec: maximumSize=100,expireAfterWrite=15m
+
+simulator:
+  location:
+    latitude: 28.1836
+    longitude: -82.4273
+    timezone: America/New_York
+  
+  system:
+    solar:
+      capacity-kw: 10.0
+      panel-efficiency: 0.20
+      inverter-efficiency: 0.96
+      temperature-coefficient: -0.004
+    battery:
+      capacity-kwh: 13.5
+      max-charge-rate-kw: 5.0
+      max-discharge-rate-kw: 5.0
+      initial-soc-percent: 50.0
+      min-soc-percent: 10.0
+      max-soc-percent: 95.0
+      round-trip-efficiency: 0.90
+    load:
+      baseline-kw: 2.0
+      peak-morning-kw: 4.5
+      peak-evening-kw: 6.0
+      morning-peak-hour: 7
+      evening-peak-hour: 19
+      
+  mqtt:
+    broker-url: tcp://localhost:1883
+    topic: home/telemetry/power
+    client-id: helios-sim
+    qos: 1
+    retain: false
+    username: ${MQTT_USERNAME:}
+    password: ${MQTT_PASSWORD:}
+    
+  publishing:
+    rate-ms: 5000
+    
+  weather:
+    provider: openweathermap
+    api-key: ${WEATHER_API_KEY:demo}
+    base-url: https://api.openweathermap.org/data/2.5
+    cache-ttl-minutes: 15
+
+logging:
+  level:
+    com.p3bustos.heliossim: INFO
+    org.eclipse.paho: WARN
