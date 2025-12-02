@@ -1,5 +1,7 @@
 # Helios Sim
 
+[![Backend CI](https://github.com/p3bustos/helios-sim/actions/workflows/backend-ci.yml/badge.svg)](https://github.com/p3bustos/helios-sim/actions/workflows/backend-ci.yml)
+
 A real-time site power telemetry simulator that models residential energy systems with solar panels, battery storage, and grid connectivity. Uses real weather data for realistic solar production simulation.
 
 ## Features
