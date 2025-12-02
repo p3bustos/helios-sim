@@ -42,14 +42,13 @@ jobs:
       - name: Run tests
         run: mvn test -B
       
-      - name: Generate test report
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
-        uses: dorny/test-reporter@v1
         with:
-          name: Maven Tests
-          path: backend/target/surefire-reports/*.xml
-          reporter: java-junit
-          fail-on-error: true
+          files: |
+            backend/target/surefire-reports/*.xml
+
       
       - name: Upload build artifacts
         if: success()
