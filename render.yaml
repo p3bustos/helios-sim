@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: helios-sim
+    env: java
+    buildCommand: cd backend && mvn clean install -DskipTests
+    startCommand: java -jar backend/target/helios-sim-1.0.0-SNAPSHOT.jar
+    envVars:
+      - key: WEATHER_API_KEY
+        sync: false
+      - key: JAVA_VERSION
+        value: 21
